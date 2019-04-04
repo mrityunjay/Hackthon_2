@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#page {
+  margin-left:auto;
+  margin-right:auto;
+  width:960px;
+}
+button {
+  background-color: #f2f2f2; /* Green */
+  border: none;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+}
+
+body {
+ background: url(bgimage.jpg) no-repeat center center fixed;
+ -webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
+ background-size: cover;
+}
+</style>
+
+<script type="text/javascript">
+
+  function post () {
+    myPost = document.getElementById("dynamic");
+    
+    textAreaText= document.getElementById("text_post");
+    postData=textAreaText.value;
+
+    var html=`
+    <div style="padding: 10px"></div>
+      <div style="background-color: grey;width:457px; padding:10px;text-align:center;font-size:20px">`+postData+` 
+      <div style="display:flex;padding-top:10px;">
+     <div  title ="5" style="width: 150px; float:left;margin:2px;"> <button style="border-radius: 25px;" type="button">Retailers viewed</button> </div>
+     <div title ="2" style="width: 200px; float:left;margin:2px;"> <button style="border-radius: 25px;" type="button">Retailers contacted</button> </div>
+     <div  title ="9500" style="width: 250px; float:left;margin:2px;"> <button style="border-radius: 25px;" type="button">Customers who also bought</button> </div>
+   </div>
+<div style="padding: 10px"></div>
+   `;
+
+
+    myPost.innerHTML+=html;
+    textAreaText.value=" ";
+
+    sendEmail(postData);
+  }
+
+  function sendEmail(text){
+
+    const Http = new XMLHttpRequest();
+const url='http://localhost:9000/SendMailToCustomer?q='+text;
+Http.open("GET", url);
+Http.send();
+Http.onreadystatechange=(e)=>{
+console.log(Http.responseText)
+}
+
+  }
+
+ </script>
+</head>
+
+<body>
+<h1 style="background-color: #2274b0;text-align:center; color:#f4f2f1;"> Get your thoughts Discounted
+<a href="#" ><div style="float:right;font-size:16px;margin:6px;text-align:center">Welcome John</div></a>
+</h1>
+<div id="page">
+<div style="width: 200px; float:left; height:200px; background:gray; margin:10px">
+<img src="images.jpg" alt="Smiley face" height="200px" width="200px">
+<div style="background-color: #008CBA;width:200px;">John Peterson</div>
+</div>
+<div style="width: 500px; float:left; height:100px;margin:10px">
+<textarea rows="5" cols="60" id="text_post">
+
+</textarea>
+
+<div style="padding: 10px"></div>
+<button type="button" style="background-color: #8CD4F7;padding:12px;font-size:16px;" onclick="javascript:post();">Post</button> 
+
+<div id='dynamic'></div>
+
+<div style="padding: 10px"></div>
+<div style="background-color: grey;width:457px; padding:10px;text-align:center;font-size:20px"> I want to purchase Samsung TV
+   <div style="display:flex;padding-top:10px;">
+     <div  title ="5" style="width: 150px; float:left;margin:2px;"> <button style="border-radius: 25px;" type="button">Retailers viewed</button> </div>
+     <div title ="2" style="width: 200px; float:left;margin:2px;"> <button style="border-radius: 25px;" type="button">Retailers contacted</button> </div>
+     <div  title ="9500" style="width: 250px; float:left;margin:2px;"> <button style="border-radius: 25px;" type="button">Customers who also bought</button> </div>
+   </div>
+</div>
+<div style="padding: 10px"></div>
+<div style="background-color: grey;width:457px;padding:10px;text-align:center;font-size:20px"> Want to buy a MacBook
+     <div style="display:flex;padding-top:10px;">
+     <div  title ="5" style="width: 150px; float:left;margin:2px;"> <button style="border-radius: 25px;" type="button">Retailers viewed</button> </div>
+     <div title ="2" style="width: 200px; float:left;margin:2px;"> <button style="border-radius: 25px;" type="button">Retailers contacted</button> </div>
+     <div  title ="9500" style="width: 250px; float:left;margin:2px;"> <button style="border-radius: 25px;" type="button">Customers who also bought</button> </div>
+   </div>
+</div>
+</div>
+     <div style=" float:left; margin:10px;"> 
+          <div style="font-size:20px;">Top selling products</div>
+          <div><img src="tv.jpg" alt="Smiley face" height="150px" width="200px"></div>
+          <a href="url"> Oracle TV</a><br>
+          <a href="url"> Oracle Mobile</a><br>
+          <a href="url"> Oracle Laptop</a><br>
+          <a href="url"> Oracle HeadPhones</a><br>
+     </div>
+</div>
+</body>
+</html>
